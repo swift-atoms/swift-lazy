@@ -2,7 +2,7 @@ import Lazy
 import Testing
 
 @Suite
-struct `Lazy Tests` {
+struct `Lazy evaluates its builder on each value access` {
 
     @Test
     func `value returns what the builder produces`() {
