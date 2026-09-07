@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Lazy", targets: ["Lazy"]),
-        .library(name: "Lazy Standard Library Integration", targets: ["Lazy Standard Library Integration"]),
-        .library(name: "Lazy Foundation Library Integration", targets: ["Lazy Foundation Library Integration"]),
+
+        .library(name: "Lazy Foundation Integration", targets: ["Lazy Foundation Integration"]),
         .library(name: "Lazy Test Support", targets: ["Lazy Test Support"]),
     ],
     dependencies: [],
@@ -25,20 +25,13 @@ let package = Package(
             ],
             path: "Sources/Lazy"
         ),
+        
         .target(
-            name: "Lazy Standard Library Integration",
+            name: "Lazy Foundation Integration",
             dependencies: [
                 .target(name: "Lazy"),
             ],
-            path: "Sources/Lazy Standard Library Integration"
-        ),
-        .target(
-            name: "Lazy Foundation Library Integration",
-            dependencies: [
-                .target(name: "Lazy"),
-                .target(name: "Lazy Standard Library Integration"),
-            ],
-            path: "Sources/Lazy Foundation Library Integration"
+            path: "Sources/Lazy Foundation Integration"
         ),
         .target(
             name: "Lazy Test Support",
@@ -52,8 +45,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Lazy"),
                 .target(name: "Lazy Test Support"),
-                .target(name: "Lazy Standard Library Integration"),
-                .target(name: "Lazy Foundation Library Integration"),
+                .target(name: "Lazy Foundation Integration"),
             ],
             path: "Tests/Lazy Tests"
         ),
