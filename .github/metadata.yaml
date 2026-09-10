@@ -1,9 +1,9 @@
 # .github/metadata.yaml
-description: "A call-by-name thunk deferring construction of a value until access."
+description: "Directional sign for Swift — the axis-free positive/negative orientation, with opposite and signedness."
 topics:
   - primitives
-  - laziness
-  - type-safety
+  - direction
+  - geometry
 homepage: "https://swift-institute.org"
 readme:
   family: E
