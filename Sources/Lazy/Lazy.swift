@@ -1,5 +1,3 @@
-/// A repeatable factory. Each access produces a fresh value, which may be noncopyable.
-/// Neither values nor failures are cached; accessing the value again retries the factory.
 public struct Lazy<Value: ~Copyable, FactoryFailure: Swift.Error> {
 
     @usableFromInline
