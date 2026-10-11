@@ -1,4 +1,4 @@
-public struct Lazy<Value: ~Copyable, FactoryFailure: Swift.Error> {
+public struct Lazy<Value: ~Copyable, FactoryFailure: Swift::Error> {
 
     @usableFromInline
     internal let build: () throws(FactoryFailure) -> Value
@@ -12,7 +12,9 @@ public struct Lazy<Value: ~Copyable, FactoryFailure: Swift.Error> {
     public init(_ build: @escaping () throws(FactoryFailure) -> Value) {
         self.build = build
     }
+}
 
+extension Lazy where Value: ~Copyable {
     @inlinable
     public func callAsFunction() throws(FactoryFailure) -> Value {
         try build()
