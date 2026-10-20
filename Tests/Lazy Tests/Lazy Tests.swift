@@ -69,7 +69,10 @@ extension `Lazy evaluates its builder on each value access` {
 
     @Test func `throwing autoclosures defer evaluation`() throws {
         var calls = 0
-        func produce() throws(FactoryError) -> Int { calls += 1; return calls }
+        func produce() throws(FactoryError) -> Int {
+            calls += 1
+            return calls
+        }
         let lazy = Lazy<Int, FactoryError>(try produce())
         #expect(calls == 0)
         #expect(try lazy() == 1)

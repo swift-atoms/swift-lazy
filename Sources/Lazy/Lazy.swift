@@ -21,7 +21,6 @@ extension Lazy where Value: ~Copyable {
     }
 }
 
-
 extension Lazy where Value: ~Copyable, FactoryFailure == Never {
     @inlinable
     public init(_ build: @escaping @autoclosure () -> Value) {

@@ -1,2 +1,2 @@
-@_exported public import Lazy
 import Foundation
+@_exported public import Lazy
