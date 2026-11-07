@@ -1,57 +1,61 @@
 import Lazy
 import Testing
 
-@Suite
-struct `Lazy evaluates its builder on each value access` {
+enum `Lazy Tests` {}
 
-    @Test
-    func `value returns what the builder produces`() {
-        let lazy = Lazy(42)
+extension `Lazy Tests` {
+    @Suite
+    struct `Lazy evaluates its builder on each value access` {
 
-        #expect(lazy.value == 42)
-    }
+        @Test
+        func `value returns what the builder produces`() {
+            let lazy = Lazy(42)
 
-    @Test
-    func `autoclosure form defers evaluation until access`() {
-        final class Box {
-            var invoked = false
-        }
-        let box = Box()
-
-        func build() -> Int {
-            box.invoked = true
-            return 1
+            #expect(lazy.value == 42)
         }
 
-        let lazy = Lazy(build())
-        #expect(!box.invoked)
+        @Test
+        func `autoclosure form defers evaluation until access`() {
+            final class Box {
+                var invoked = false
+            }
+            let box = Box()
 
-        _ = lazy.value
-        #expect(box.invoked)
-    }
+            func build() -> Int {
+                box.invoked = true
+                return 1
+            }
 
-    @Test
-    func `builder is re-invoked on every access`() {
-        final class Box {
-            var count = 0
+            let lazy = Lazy(build())
+            #expect(!box.invoked)
+
+            _ = lazy.value
+            #expect(box.invoked)
         }
-        let box = Box()
 
-        let lazy = Lazy { () -> Int in
-            box.count += 1
-            return box.count
+        @Test
+        func `builder is re-invoked on every access`() {
+            final class Box {
+                var count = 0
+            }
+            let box = Box()
+
+            let lazy = Lazy { () -> Int in
+                box.count += 1
+                return box.count
+            }
+
+            #expect(lazy.value == 1)
+            #expect(lazy.value == 2)
+            #expect(box.count == 2)
         }
-
-        #expect(lazy.value == 1)
-        #expect(lazy.value == 2)
-        #expect(box.count == 2)
     }
 }
 
 private enum FactoryError: Swift.Error, Equatable { case unavailable }
 private struct Token: ~Copyable { let value: Int }
 
-extension `Lazy evaluates its builder on each value access` {
+extension `Lazy Tests`.`Lazy evaluates its builder on each value access` {
     @Test func `throwing factories retry and produce noncopyable values`() throws {
         var attempts = 0
         let lazy = Lazy { () throws(FactoryError) -> Token in
