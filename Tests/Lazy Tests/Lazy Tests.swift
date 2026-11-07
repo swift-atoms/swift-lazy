@@ -48,7 +48,7 @@ struct `Lazy evaluates its builder on each value access` {
     }
 }
 
-private enum FactoryError: Error, Equatable { case unavailable }
+private enum FactoryError: Swift.Error, Equatable { case unavailable }
 private struct Token: ~Copyable { let value: Int }
 
 extension `Lazy evaluates its builder on each value access` {
